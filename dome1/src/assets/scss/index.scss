@@ -1,0 +1,307 @@
+// reset
+html {font-size: 14px;}
+html,body,h1,h2,h3,h4,h5,h6,div,dl,dt,dd,ul,ol,li,p,blockquote,
+pre,hr,figure,table,caption,th,td,form,fieldset,legend,input,
+button,textarea,menu{margin:0;padding:0;
+box-sizing:border-box;
+-moz-box-sizing:border-box; /* Firefox */
+-webkit-box-sizing:border-box; /* Safari */}
+header,footer,section,article,aside,nav,hgroup,
+address,figure,figcaption,menu,details{display:block;}
+table{border-collapse:collapse;border-spacing:0;}
+caption,th{text-align:left;font-weight:normal;}
+html,body,fieldset,img,iframe,abbr{border:0;}
+i,cite,em,var,address,dfn{font-style:normal;}
+[hidefocus],summary{outline:0;}
+li{list-style:none;}
+h1,h2,h3,h4,h5,h6,small{font-size:100%;}
+sup,sub{font-size:83%;}
+pre,code,kbd,samp{font-family:inherit;}
+q:before,q:after{content:none;}
+textarea{overflow:auto;resize:none;}
+label,summary{cursor:default;}
+a,button{cursor:pointer;}
+h1,h2,h3,h4,h5,h6,em,strong,b{font-weight:bold;}
+del,ins,u,s,a,a:hover{text-decoration:none;}
+body,textarea,input,button,select,keygen,legend{
+color:#333;outline:0; font-family: Arial, Helvetica, sans-serif;}
+body{background:#fff;}
+a,a:hover{color:#333;}
+img{display: block;}
+
+.clear{clear: both;}
+.inblock{display: inline-block;}
+.block{display:block;}
+
+// 其他地方想引入变量 使用map-get的方式如下
+// color:map-get($colors, 'home' )
+
+// .bjimg{
+//   background: url("../images/index.png") no-repeat 0 0;
+//   // 图片大小 原图为750px*910 先调整为375*455
+//   background-size:26.785714rem 32.5rem;
+//   display: block;
+// }
+
+// scss
+$homecolor: #db9e3f;
+$color-fff:#fff;
+$color-000:#000;
+$color-f00:red;
+$color-666:#666;
+$color-f9f9f9:#f9f9f9;
+
+// $colors  颜色背景
+$colors:(
+  "home":$homecolor,
+  "fff":$color-fff,
+  "000":$color-000,
+  "f00":$color-f00,
+  "666":$color-666,
+  "f9f9f9":$color-f9f9f9,
+);
+@each $colorKey,$color in $colors {
+    .color-#{$colorKey}{
+      color:$color
+    }
+    .bg-#{$colorKey}{
+      background-color:$color
+    }
+}
+
+
+// $border  边框
+$border:(
+  "no": none,
+  "home": solid 1px $homecolor,
+  "fff": solid 1px $color-fff,
+);
+@each $borderkey,$border in $border {
+    .border-#{$borderkey}{
+      border:$border
+    }
+}
+
+// text-align 
+@each $var in (left,center,right) {
+  .text-#{$var}{
+    text-align:$var;
+  }
+}
+
+// float: right left;
+@each $var in (left,right) {
+  .fl-#{$var}{
+    float:$var;
+  }
+}
+
+// font
+$base-font-size:1rem;
+// xs 10 sm 12  md 14  lg 16 xl 18 xxl 24 xxxl 26
+$font-sizes:(s8:.571429,s10:.714286,s12:.857143,s14:1,s16:1.142857,s18:1.285714,s20:1.571429, s24:1.714286, s26:1.857143,s28:2,s30:2.142857,s32:2.285714
+,s34:2.428571,s36:2.571429,s38:2.714286,s40:2.857143,s42:3,s44:3.142857,s46:3.285714,s48:3.428571,s50:3.571429);
+@each $sizeKey,$size in $font-sizes {
+  .font-#{$sizeKey}{
+    font-size:$size*$base-font-size;
+  }
+}
+
+
+// margin padding
+$spacing-types:(m:margin,p:padding);
+$spacing-directions:(
+  t:top,
+  r:right,
+  l:left,
+  b:bottom
+);
+$spacing-base-size:1rem;
+$spacing-sizes:(
+  0:0,
+  5:.357143,
+  10:.714286,
+  15:1.071429,
+  20:1.428571,
+  25:1.785714,
+  30:2.142857,
+  35:2.142857,
+  40:2.857143,
+  45:3.214286,
+  50:3.571429
+);
+
+
+@each $typeKey,$type in $spacing-types {
+  // m-1
+  @each $sizeKey,$size in $spacing-sizes {
+    .#{$typeKey}-#{$sizeKey}{
+      #{$type}: $size * $spacing-base-size
+    }
+  }
+  // mx-1
+  @each $sizeKey,$size in $spacing-sizes {
+    .#{$typeKey}x-#{$sizeKey}{
+      #{$type}-left: $size * $spacing-base-size;
+      #{$type}-right: $size * $spacing-base-size
+    }
+    .#{$typeKey}y-#{$sizeKey}{
+      #{$type}-top: $size * $spacing-base-size;
+      #{$type}-bottom: $size * $spacing-base-size
+    }
+  }
+  // mt-1
+  @each $directionKey,$direction in $spacing-directions {
+    @each $sizeKey,$size in $spacing-sizes {
+      .#{$typeKey}#{$directionKey}-#{$sizeKey}{
+          #{$type}-#{$direction}:$size * $spacing-base-size
+      }
+    }
+  }
+}
+
+
+// flex
+.f{
+  display: -webkit-flex; 
+  display: flex;
+}
+
+// flex-direction属性决定主轴的方向（即项目的排列方向）。
+// row（默认值）：主轴为水平方向，起点在左端。
+// row-reverse：主轴为水平方向，起点在右端。
+// column：主轴为垂直方向，起点在上沿。
+// column-reverse：主轴为垂直方向，起点在下沿。
+$flex-direction:(
+  xl:row,
+  xr:row-reverse,
+  yt:column,
+  yb:column-reverse
+);
+@each $key,$var in $flex-direction {
+  .flex-fx-#{$key}{
+    flex-direction:$var
+  }
+}
+
+// flex-wrap属性定义如果一条轴线排不下，如何换行
+// nowrap 不换行 
+// wrap换行，第一行在上方
+// wrap-reverse 换行，第一行在下方
+$flex-wrap:(
+  n:nowrap,
+  t:wrap ,
+  b:wrap-reverse
+);
+@each $key,$var in $flex-wrap {
+  .flex-hh-#{$key}{
+    flex-wrap:$var
+  }
+}
+
+// justify-content属性定义了项目在主轴上的对齐方式
+// flex-start（默认值）：左对齐
+// flex-end：右对齐
+// center： 居中
+// space-between：两端对齐，项目之间的间隔都相等。
+// space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。
+$flex-justify:(
+  l:flex-start,
+  r:flex-end,
+  c:center,
+  bt:space-between,
+  jg:space-around
+);
+
+@each $key,$var in $flex-justify {
+  .flex-dqx-#{$key}{
+    justify-content:$var
+  }
+}
+
+// align-items属性定义项目在交叉轴上如何对齐。
+// flex-start：交叉轴的起点对齐。
+// flex-end：交叉轴的终点对齐。
+// center：交叉轴的中点对齐。
+// baseline: 项目的第一行文字的基线对齐。
+// stretch（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度。
+
+$flex-align:(
+  t:flex-start,
+  b:flex-end ,
+  c:center,
+  z:baseline,
+  auto:stretch
+);
+@each $key,$var in $flex-align {
+  .flex-dqy-#{$key}{
+    align-items:$var
+  }
+}
+
+
+// align-content属性定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。
+// flex-start：与交叉轴的起点对齐。
+// flex-end：与交叉轴的终点对齐。
+// center：与交叉轴的中点对齐。
+// space-between：与交叉轴两端对齐，轴线之间的间隔平均分布。
+// space-around：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。
+// stretch（默认值）：轴线占满整个交叉轴。
+
+
+$flex-ac:(
+  t:flex-start,
+  b:flex-end ,
+  c:center,
+  bt:space-between,
+  jg:space-around,
+  auto:stretch
+);
+@each $key,$var in $flex-ac {
+  .flex-ac-#{$key}{
+    align-content:$var
+  }
+};
+
+// align-self属性允许单个项目有与其他项目不一样的对齐方式，
+// 可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，
+// 如果没有父元素，则等同于stretch。
+//  align-self: auto | flex-start | flex-end | center | baseline | stretch;
+
+$align-self:(
+  parent:auto,
+  t:flex-start,
+  b:flex-end ,
+  c:center,
+  z:baseline,
+  auto:stretch
+);
+@each $key,$var in $align-self {
+  .flex-dg-#{$key}{
+    align-self:$var
+  }
+};
+
+// order 排序 默认0
+$order:(1,2,3,4,5,6,7,8,9,10);
+@each $order in $order {
+    .o#{$order}{
+      order:$order
+    }
+}
+// 放大 1到10倍 空间多余放大
+$fd:(1,2,3,4,5,6,7,8,9,10);
+@each $fd in $fd {
+    .fd#{$fd}{
+      flex-grow:$fd
+    }
+}
+
+// 缩小 1到10倍 空间不足缩小 
+$sx:(1,2,3,4,5,6,7,8,9,10);
+@each $sx in $sx {
+    .sx#{$sx}{
+      flex-shrink:$sx
+    }
+}
+
