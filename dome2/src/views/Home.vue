@@ -9,7 +9,7 @@
       <hr>
       <Zfrom :model="model" :rules="rules">
           <Zfromitem lable="用户名" prop="username">
-              <Zinput v-model="model.username"></Zinput>
+              <Zinput v-model="model.username" ></Zinput>
           </Zfromitem>
           <Zfromitem lable="密码" prop="password">
               <Zinput v-model="model.password" type='password'></Zinput>
@@ -42,9 +42,8 @@ export default {
         username:'',
         password:''
       },
-      rules:{
-
-      }
+      rules:{}
+      
     }
   },
   methods:{
