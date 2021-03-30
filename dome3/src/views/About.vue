@@ -30,7 +30,6 @@ export default {
     props:["id"],//使用了props 之后可以直接使用传递值
     created(){
      console.log(this.$route);
-     console.log(this.id);
     }
 }
 </script>

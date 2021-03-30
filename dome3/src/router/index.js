@@ -38,6 +38,13 @@ const routes = [
   {
     path: '/View1',
     name: 'View1', //路由的命名
+    // 路由独享钩子
+    beforeEnter:(to,from,next)=>{
+        // 进入这个路由之前调用
+        console.log('即将~~');
+        // 不写next 则不会继续向下执行
+        next()
+    },
     components: {
       default:View1,
       View1:text
