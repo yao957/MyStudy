@@ -9,8 +9,8 @@
 </template>
 
 <script>
-// 使用element 自带的  async-validator 校验
-import Schema from 'async-validator';
+// 这个是element 自带的校验库
+import Schema from 'async-validator'
 export default {
   inject:['Zfrom'],
   name: '',
@@ -34,8 +34,9 @@ export default {
         console.log('开始校验');
         const rules = this.Zform.rules[this.prop];
         const value = this.Zform.model[this.prop];
+
         let descriptor = {[this.prop]:rules};
-         let Schema = new Schema(descriptor);
+        let Schema = new Schema(descriptor);
         //  校验器
         Schema.validator({[this.prop]:value},errors =>{
             if(errors){

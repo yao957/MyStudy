@@ -39,7 +39,7 @@ export default {
     return {
       value:'',
       model:{
-        username:'',
+        username:'zy',
         password:''
       },
       rules:{}
