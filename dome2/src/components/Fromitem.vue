@@ -29,6 +29,7 @@ export default {
   // $emit：触发当前实例上的事件。附加参数都会传给监听器回调
     this.$on('validate',this.validator)
   },
+  // 方法
   methods: {
     validator() {
         console.log('开始校验');
