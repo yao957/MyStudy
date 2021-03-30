@@ -12,21 +12,23 @@ Vue.config.productionTip = false
 // next 继续向下
 router.beforeEach( (to,from, next) =>{
   // 比如登录之前 做判断 没有登录 跳转到登录 next("/login")
-  console.log('before each');
+  console.log('before each ');
+  console.log(this);
   next();
 })
 // 全局解析守卫 2.5.0新增 与beforeEach类似，区别是在导航被确认之前，同时在所有组件内守卫和
 // 异步路由组件被解析之后，解析守卫就被调用
-// 时间比前置钩子时间完一点
+// 时间比前置钩子时间晚一点
 router.beforeResolve( (to,from, next) =>{
   console.log('before Resolve');
+  console.log(this);
   next();
 })
 
 // 全局后置钩子
 router.afterEach( (to,from ) =>{
   console.log('after each');
- 
+  console.log(this);
 })
 
 
