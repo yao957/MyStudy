@@ -1,6 +1,6 @@
 <template>
   <div class="">
-      这是首页
+      这是main页面
   </div>
 </template>
 

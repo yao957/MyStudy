@@ -1,6 +1,6 @@
 <template>
   <div class="">
-      这是首页
+      登录组件
   </div>
 </template>
 
