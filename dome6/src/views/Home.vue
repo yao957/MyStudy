@@ -7,12 +7,12 @@
 <script>
 export default {
   name: '',
-  data() { 
+  data () {
     return {
 
     }
   }
- }
+}
 </script>
 
 <style lang="" scoped>
